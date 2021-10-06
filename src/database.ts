@@ -4,6 +4,6 @@ import { open } from "sqlite";
 export const initDatabase = () => {
   return open({
     filename: "./database.db",
-    driver: sqlite3.Database
+    driver: sqlite3.Database,
   });
 };

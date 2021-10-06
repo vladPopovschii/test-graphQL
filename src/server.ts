@@ -3,10 +3,11 @@ import {
   getGraphQLParameters,
   processRequest,
   renderGraphiQL,
-  shouldRenderGraphiQL
+  shouldRenderGraphiQL,
 } from "graphql-helix";
-import { schema } from "./schema";
+import { schema } from "./graphql/schema";
 import { initDatabase } from "./database";
+import { socket } from "./graphql/socket";
 
 export const server = express();
 
@@ -32,7 +33,8 @@ server.use("/", async (req, res) => {
       request,
       schema,
       contextFactory: async () => ({
-        db: await initDatabase()
+        db: await initDatabase(),
+        socket
       })
     });
 
